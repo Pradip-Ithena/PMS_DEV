@@ -11,23 +11,23 @@ pipeline {
     }
     stage('NPM Install') {
       steps {
-        execCmd 'npm install'
-        execCmd 'npm install http-server'
+        npm install
+       npm install http-server
       }
     }
     stage('Test') {
       steps {
-        execCmd 'test Completed'
+        echo 'test Completed'
       }
     }
     stage('Build') {
       steps {
-        execCmd 'ng build --prod'
+    ng build --prod
       }
     }
     stage('Deploy') {
       steps {
-        execCmd 'ng serve --host 192.168.1.41 --port 8081'
+        ng serve --host 192.168.1.41 --port 8081
       }
     }
   }
