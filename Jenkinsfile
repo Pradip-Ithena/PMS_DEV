@@ -7,12 +7,13 @@ pipeline {
     stage('Chekout') {
       steps {
         git branch: 'main', credentialsId: 'df639a56-04b5-408d-b7ad-995f87f75ab6', url: 'https://github.com/Pradip-Ithena/PMS_DEV.git'
+        echo 'Checkout Completed'
       }
     }
     stage('NPM Install') {
       steps {
-        npm install
-       npm install http-server
+        sh 'npm install'
+        echo 'installation Completed'
       }
     }
     stage('Test') {
@@ -22,9 +23,14 @@ pipeline {
     }
     stage('Build') {
       steps {
-    ng build --prod
+        sh 'ng build --prod'
+        echo 'build Completed'
       }
     }
- 
+    stage('Deploy') {
+      steps {
+        sh 'ng serve --host 192.168.1.41 --port 8081'
+      }
+    }
   }
 }
