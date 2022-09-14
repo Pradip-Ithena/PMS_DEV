@@ -10,11 +10,10 @@ pipeline {
         echo 'Checkout Completed'
       }
     }
-    stage('NPM Install') {
-      withEnv(["NPM_CONFIG_LOGLEVEL=warn"]) {
-        sh 'npm install'
-        sh 'npm install http-server'
-      }
+      stage('NPM Install') {
+        withEnv(["NPM_CONFIG_LOGLEVEL=warn"]) {
+            sh 'npm install'
+        }
     }
     stage('Test') {
       steps {
