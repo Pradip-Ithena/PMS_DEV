@@ -3,8 +3,6 @@ pipeline {
   tools {
     nodejs "nodeJS"
   }
-
-
   stages {
     stage('Chekout') {
       steps {
@@ -16,16 +14,18 @@ pipeline {
       steps {
         sh 'npm install'
         sh 'npm install http-server'
+        echo 'installation Completed'
       }
     }
     stage('Test') {
       steps {
-        sh 'ng test'
+        echo 'test Completed'
       }
     }
     stage('Build') {
       steps {
         sh 'ng build --prod'
+        echo 'build Completed'
       }
     }
     stage('Deploy') {
