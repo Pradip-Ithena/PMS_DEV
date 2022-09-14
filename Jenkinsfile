@@ -5,9 +5,6 @@ pipeline {
     stages {
         stage('NPM Install') {
             steps {
-                script {
-                    notifyBitbucket(buildStatus: 'INPROGRESS')
-                }
                 sh 'npm install'
                 sh 'npm install http-server'
             }
