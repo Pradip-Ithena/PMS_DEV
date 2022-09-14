@@ -25,10 +25,6 @@ pipeline {
     ng build --prod
       }
     }
-    stage('Deploy') {
-      steps {
-        ng serve --host 192.168.1.41 --port 8081
-      }
-    }
+ 
   }
 }
