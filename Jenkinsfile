@@ -12,7 +12,7 @@ pipeline {
     }
     stage('NPM Install') {
       steps {
-        sh 'npm install'
+        bash 'npm install'
         echo 'installation Completed'
       }
     }
@@ -23,13 +23,13 @@ pipeline {
     }
     stage('Build') {
       steps {
-        sh 'ng build --prod'
+        bash 'ng build --prod'
         echo 'build Completed'
       }
     }
     stage('Deploy') {
       steps {
-        sh 'ng serve --host 192.168.1.41 --port 8081'
+        bash 'ng serve --host 192.168.1.41 --port 8081'
       }
     }
   }
