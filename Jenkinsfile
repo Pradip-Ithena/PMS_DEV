@@ -12,8 +12,8 @@ pipeline {
     }
     stage('NPM Install') {
       steps {
-        bat 'npm install'
-        bat 'npm install http-server'
+        sh 'npm install'
+        sh 'npm install http-server'
         echo 'installation Completed'
       }
     }
@@ -24,13 +24,13 @@ pipeline {
     }
     stage('Build') {
       steps {
-        bat 'ng build'
+        sh 'ng build'
         echo 'build Completed'
       }
     }
     stage('Deploy') {
       steps {
-        bat 'ng serve --host 192.168.1.41 --port 8081'
+        sh 'ng serve --host 192.168.1.41 --port 8081'
       }
     }
   }
