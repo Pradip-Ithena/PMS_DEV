@@ -30,7 +30,7 @@ pipeline {
     }
     stage('Deploy') {
       steps {
-        sh 'npm run ng serve --host 192.168.1.41 --port 8081'
+        sh 'npm run ng serve --host 65.2.163.29 --port 4201'
       }
     }
   }
