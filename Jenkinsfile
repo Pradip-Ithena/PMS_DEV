@@ -24,13 +24,13 @@ pipeline {
     }
     stage('Build') {
       steps {
-        sh 'ng build'
+        sh 'npm run ng build'
         echo 'build Completed'
       }
     }
     stage('Deploy') {
       steps {
-        sh 'ng serve --host 192.168.1.41 --port 8081'
+        sh 'npm run ng serve --host 192.168.1.41 --port 8081'
       }
     }
   }
