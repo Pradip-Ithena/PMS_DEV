@@ -24,10 +24,11 @@ pipeline {
     }
     stage('Build + SonarQube analysis') {
       steps {
-        withSonarQubeEnv('sonar', envOnly: true) {
-          println $ {
-            env.SONAR_HOST_URL
-          }
+        script {
+            scannerHome = tool 'SonarScanner';
+        }
+        withSonarQubeEnv('sonar') {
+            bat "${scannerHome}/bin/sonar-scanner.bat" 
         }
         bat 'npm run ng build'
         echo 'build Completed'
