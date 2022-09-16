@@ -12,8 +12,8 @@ pipeline {
     }
     stage('NPM Install') {
       steps {
-        sh 'npm install'
-        sh 'npm install http-server'
+        bat 'npm install'
+        bat 'npm install http-server'
         echo 'installation Completed'
       }
     }
@@ -22,15 +22,20 @@ pipeline {
         echo 'test Completed'
       }
     }
-    stage('Build') {
+    stage('Build + SonarQube analysis') {
       steps {
-        sh 'npm run ng build'
+        withSonarQubeEnv('sonar', envOnly: true) {
+          println $ {
+            env.SONAR_HOST_URL
+          }
+        }
+        bat 'npm run ng build'
         echo 'build Completed'
       }
     }
     stage('Deploy') {
       steps {
-        sh 'npm run ng serve --host 65.2.163.29 --port 4201'
+        bat 'npm run ng serve --host 65.2.163.29 --port 4201'
       }
     }
   }
