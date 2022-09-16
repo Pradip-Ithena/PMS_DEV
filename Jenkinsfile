@@ -25,7 +25,7 @@ pipeline {
     stage('Build + SonarQube analysis') {
       steps {
         script {
-            scannerHome = tool 'SonarScanner';
+            scannerHome = tool 'SonarQube Scanner';
         }
         withSonarQubeEnv('sonar') {
             bat "${scannerHome}/bin/sonar-scanner.bat" 
