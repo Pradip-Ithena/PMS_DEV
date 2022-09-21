@@ -6,14 +6,14 @@ pipeline {
   stages {
     stage('Chekout') {
       steps {
-        git branch: 'main', credentialsId: '9cc6dcda-ec9f-4b57-939b-9985d0298570', url: 'https://github.com/Pradip-Ithena/PMS_DEV.git'
+        git branch: 'main', url: 'https://github.com/Pradip-Ithena/PMS_DEV.git'
         echo 'Checkout Completed'
       }
     }
     stage('NPM Install') {
       steps {
-        bat 'npm install'
-        bat 'npm install http-server'
+        sh 'npm install'
+        sh 'npm install http-server'
         echo 'installation Completed'
       }
     }
@@ -28,15 +28,15 @@ pipeline {
             scannerHome = tool 'SonarQube Scanner';
         }
         withSonarQubeEnv('sonar') {
-            bat "${scannerHome}/bin/sonar-scanner.bat" 
+            sh "${scannerHome}/bin/sonar-scanner.sh" 
         }
-        bat 'npm run ng build'
+        sh 'npm run ng build'
         echo 'build Completed'
       }
     }
     stage('Deploy') {
       steps {
-        bat 'npm run ng serve --host 65.2.163.29 --port 4201'
+        sh 'npm run ng serve --host 65.2.163.29 --port 4201'
         echo 'running state'
       }
     }
