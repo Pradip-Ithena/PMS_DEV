@@ -37,7 +37,7 @@ pipeline {
     stage('Deploy') {
       steps {
         bat 'npm run ng serve --host 65.2.163.29 --port 4201'
-        echo 'currently in running state'
+        echo 'running state'
       }
     }
   }
