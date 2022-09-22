@@ -41,7 +41,7 @@ pipeline {
       steps {
        sh "mv ${DIST_ARCHIVE}.zip /home/ubuntu/jenkins/"
        sh "unzip /home/ubuntu/jenkins/${DIST_ARCHIVE}.zip -d /home/ubuntu/jenkins/"
-        echo 'moved'
+        echo 'Deployed'
       }
     }
   }
