@@ -40,7 +40,7 @@ pipeline {
     stage('Deploy') {
       steps {
        sh "mv ${DIST_ARCHIVE}.zip /home/ubuntu/jenkins/"
-       sh "unzip /home/ubuntu/jenkins/${DIST_ARCHIVE}.zip -d /home/ubuntu/jenkins/"
+       sh "unzip /home/ubuntu/jenkins/${DIST_ARCHIVE}.zip -d /home/ubuntu/jenkins/${DIST_ARCHIVE}"
         echo 'Deployed'
       }
     }
