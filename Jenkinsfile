@@ -41,7 +41,7 @@ pipeline {
         sh "mv ${DIST_ARCHIVE}.zip /home/ubuntu/jenkins/"
         sh "unzip /home/ubuntu/jenkins/${DIST_ARCHIVE}.zip -d /home/ubuntu/jenkins/${DIST_ARCHIVE}"
         sh "cd /home/ubuntu/jenkins/${DIST_ARCHIVE}/PMS-DEV && pm2 serve --spa . --port 4200"
-        echo 'Deployed'
+        echo 'Deployed and run'
       }
     }
   }
