@@ -1,3 +1,5 @@
+def VERSION = "${env.BUILD_NUMBER}"
+def DIST_ARCHIVE = "dist.${env.BUILD_NUMBER}"
 pipeline {
   agent any
   tools {
@@ -28,10 +30,18 @@ pipeline {
         echo 'build Completed'
       }
     }
+       stage('Archive') {
+            steps {
+              sh "cd dist && zip -r ../${DIST_ARCHIVE}.zip . && cd .."
+              archiveArtifacts artifacts: "${DIST_ARCHIVE}.zip", fingerprint: true
+              echo 'folder ziped'
+            }
+        }
     stage('Deploy') {
       steps {
-        sh 'npm run ng serve --host 65.2.163.29 --port 4201'
-        echo 'running state'
+       sh "mv ${DIST_ARCHIVE}.zip /home/ubuntu/jenkins/"
+       sh "unzip /home/ubuntu/jenkins/${DIST_ARCHIVE}.zip -d /home/ubuntu/jenkins/"
+        echo 'moved'
       }
     }
   }
