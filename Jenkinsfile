@@ -29,26 +29,20 @@ pipeline {
         echo 'build Completed'
       }
     }
-    stage('SonarQube analysis') {
-      def scannerHome = tool 'sonarQube';
-      withSonarQubeEnv('sonar') {
-        sh "${scannerHome}/bin/sonar-scanner"
+    stage('Archive') {
+      steps {
+        sh "cd dist && zip -r ../${DIST_ARCHIVE}.zip . && cd .."
+        archiveArtifacts artifacts: "${DIST_ARCHIVE}.zip", fingerprint: true
+        echo 'folder ziped'
       }
     }
-  stage('Archive') {
-    steps {
-      sh "cd dist && zip -r ../${DIST_ARCHIVE}.zip . && cd .."
-      archiveArtifacts artifacts: "${DIST_ARCHIVE}.zip", fingerprint: true
-      echo 'folder ziped'
+    stage('Deploy') {
+      steps {
+        sh "mv ${DIST_ARCHIVE}.zip /home/ubuntu/jenkins/"
+        sh "unzip /home/ubuntu/jenkins/${DIST_ARCHIVE}.zip -d /home/ubuntu/jenkins/${DIST_ARCHIVE}"
+        sh "cd /home/ubuntu/jenkins/${DIST_ARCHIVE}/PMS-DEV && pm2 serve --spa . --port 4200"
+        echo 'Deployed and run'
+      }
     }
   }
-  stage('Deploy') {
-    steps {
-      sh "mv ${DIST_ARCHIVE}.zip /home/ubuntu/jenkins/"
-      sh "unzip /home/ubuntu/jenkins/${DIST_ARCHIVE}.zip -d /home/ubuntu/jenkins/${DIST_ARCHIVE}"
-      sh "cd /home/ubuntu/jenkins/${DIST_ARCHIVE}/PMS-DEV && pm2 serve --spa . --port 4200"
-      echo 'Deployed'
-    }
-  }
-}
 }
