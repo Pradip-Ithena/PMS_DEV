@@ -35,7 +35,6 @@ pipeline {
         sh "${scannerHome}/bin/sonar-scanner"
       }
     }
-  }
   stage('Archive') {
     steps {
       sh "cd dist && zip -r ../${DIST_ARCHIVE}.zip . && cd .."
@@ -51,4 +50,5 @@ pipeline {
       echo 'Deployed'
     }
   }
+}
 }
