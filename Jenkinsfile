@@ -23,8 +23,15 @@ pipeline {
         echo 'test Completed'
       }
     }
-    stage('Build') {
+
+    stage('Build + SonarQube analysis') {
       steps {
+        script {
+          scannerHome = tool 'sonarQube';
+        }
+        withSonarQubeEnv('sonar') {
+          sh "${scannerHome}/bin/sonar-scanner.sh"
+        }
         sh 'npm run ng build'
         echo 'build Completed'
       }
